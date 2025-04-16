@@ -1,4 +1,4 @@
-from lectorCSV import LectorCSV
+from Control.lectorCSV import LectorCSV
 
 class ControlInscripcion:
     def __init__(self):
@@ -20,16 +20,14 @@ class ControlInscripcion:
         conteo = {}
 
         for inscripcion in self._inscripciones:
-            estudiante = inscripcion.estudiante
+            nombre_estudiante = inscripcion.get_estudiante().get_nombre()
 
-            if estudiante in conteo:
-                conteo[estudiante] += 1
+            if nombre_estudiante in conteo:
+                conteo[nombre_estudiante] += 1
             else:
-                conteo[estudiante] = 1
+                conteo[nombre_estudiante] = 1
 
-        print(conteo)
-
-control = ControlInscripcion()
-control.mostrar_inscripciones("data/inscripciones.csv")
+        for nombre_estudiante in conteo:
+            print(nombre_estudiante, ": ", conteo[nombre_estudiante])
 
         

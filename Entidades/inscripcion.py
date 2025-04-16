@@ -1,4 +1,7 @@
 class Inscripcion:
     def __init__(self, estudiante, materia):
-        self.estudiante = estudiante
-        self.materia = materia 
+        self._estudiante = estudiante
+        self._materia = materia 
+
+    def get_estudiante(self):
+        return self._estudiante
