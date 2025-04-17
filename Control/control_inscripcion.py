@@ -5,7 +5,7 @@ class ControlInscripcion:
         self._inscripciones = []
         self._url = ""
     
-    def cargar_inscripciones(self):
+    def _cargar_inscripciones(self):
         lector = LectorCSV()
 
         inscripciones = lector.leer_inscripciones(self._url)
@@ -13,9 +13,12 @@ class ControlInscripcion:
         return inscripciones
 
     def mostrar_inscripciones(self, url):
+        if not isinstance(url, str):
+            raise ValueError("La url debe ser una cadena de texto.")
+
         self._url = url
 
-        self._inscripciones = self.cargar_inscripciones()
+        self._inscripciones = self._cargar_inscripciones()
 
         conteo = {}
 
@@ -27,7 +30,15 @@ class ControlInscripcion:
             else:
                 conteo[nombre_estudiante] = 1
 
+        resultado = ""
+
         for nombre_estudiante in conteo:
-            print(nombre_estudiante, ": ", conteo[nombre_estudiante])
+            resultado += f"{nombre_estudiante} : {conteo[nombre_estudiante]}\n"
+
+        if resultado == "":
+            resultado = "No hay inscripciones registradas."
+            return resultado
+
+        return resultado
 
         
